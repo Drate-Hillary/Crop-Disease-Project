@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Verification</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .email-container {
+            max-width: 600px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #dee2e6;
+        }
+
+        .email-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            color: #0a500a;
+            padding: 15px;
+        }
+        .email-body {
+            padding: 20px;
+            background-color: rgba(122,217,80, 0.08);
+        }
+        .email-body p{
+            font-size: 0.9rem;
+        }
+        .btn-verify {
+            background-color: #1e720f;
+            color: white;
+            padding: 8px 12px;
+            font-weight: 500;
+            width: 50%;
+            font-size: 0.8rem;
+        }
+        .btn-verify:hover{
+            background-color: #0a500a;
+            color: white;
+        }
+        .footer {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-4">
+        <div class="email-container mx-auto">
+            <div class="email-header">
+                <i class="fa fa-leaf fs-4"></i>
+                <h2 class="mb-0">Welcome to Crop Guard!</h2>
+            </div>
+            
+            <div class="email-body">
+                <p class="mb-3 fs-6">Hello <strong>{{ user.first_name }}</strong>,</p>
+                <p class="mb-1">Thank you for registering with us. Please click the button below to verify your email address and activate your account.</p>
+                
+                <div class="d-grid gap-2 col-md-6 mx-auto my-2">
+                    <a href="{{ verification_link }}" class="btn btn-verify">
+                        Verify Email
+                    </a>
+                </div>
+                
+                <p class="mb-2">If the button doesn't work, copy and paste this link into your browser:</p>
+                <div class="card mb-4">
+                    <div class="card-body p-2">
+                        <code class="text-break">{{ verification_link }}</code>
+                    </div>
+                </div>
+                
+                <p class="mb-4">If you didn't create an account with us, please ignore this email.</p>
+                
+                <hr class="my-4">
+                <div class="footer text-center">
+                    <p class="mb-0">Best regards,<br><strong>{{ user.first_name }}</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

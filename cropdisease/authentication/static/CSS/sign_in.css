@@ -1,0 +1,136 @@
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8f1e4 100%);
+}
+
+.login-container {
+    max-width: 320px;
+    margin: 0 auto;
+    padding: 1rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.login-header {
+    margin-bottom: 20px;
+    margin-top: 9px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.header .fa-leaf {
+    font-size: x-large;
+    color: #1e720f;
+}
+
+.login-header h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #343a40;
+    margin-bottom: 5px;
+}
+
+.form-floating {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.form-floating label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.form-control {
+    border-radius: 6px;
+    min-height: 3.5rem;
+    font-size: 0.9rem;
+    padding: 1rem 2.5rem 0.5rem 0.75rem;
+    font-weight: 500;
+}
+
+.form-control:focus {
+    border-color: #1e720f;
+    box-shadow: 0 0 0 0.25rem rgba(81, 179, 48, 0.15);
+}
+
+.btn-login {
+    width: 100%;
+    padding: 10px;
+    font-weight: 600;
+    border-radius: 8px;
+    background-color: #1e720f;
+    border: none;
+    transition: all 0.3s;
+}
+
+.btn-login:hover {
+    background-color: #0a500a;
+    transform: translateY(-1px);
+}
+
+.form-check-input:checked {
+    background-color: #1e720f;
+    border-color: #51b330;
+}
+
+.forgot-password a {
+    font-size: 0.85rem;
+    color: #6c757d;
+    transition: color 0.2s;
+    font-weight: 500;
+}
+
+.forgot-password a:hover {
+    color: #1e720f;
+    text-decoration: none;
+}
+
+.register-link {
+    font-size: 0.9rem;
+}
+
+.register-link a {
+    font-weight: 500;
+    color: #1e720f;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #6c757d;
+    z-index: 5;
+    height: 20px;
+    width: 20px;
+    transition: opacity 0.2s;
+}
+
+.password-toggle:hover {
+    opacity: 0.7;
+}
+
+.icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+}
+
+.icon.login {
+    filter: brightness(0) invert(1);
+}
+
+/* Fallback styling for custom SVG icons */
+.password-toggle img {
+    transition: opacity 0.2s;
+}
