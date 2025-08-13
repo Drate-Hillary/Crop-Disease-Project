@@ -16,9 +16,38 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
     <style>
         :root {
-            --primary-green: #2e7d32;
-            --secondary-green: #81c784;
+            --primary-green: #1e720f;
+            --secondary-green: #0a500a;
+            --dark-green: #053b05;
             --light-green: #e8f5e9;
+            --red-color: #d32f2f;
+        }
+
+        p, td{
+            font-size: 0.9rem;
+            font-weight: 450;
+        }
+
+        .btn{
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .btn-success{
+            background-color: var(--primary-green);
+            color: #ffffff;
+        }
+
+        .btn-success:hover{
+            background-color: var(--secondary-green);
+        }
+
+        .btn-outline-success{
+            border: 1px solid var(--primary-green);
+            color: var(--secondary-green);
+        }
+
+        .btn-outline-success:hover{
+            background-color: var(--secondary-green);
         }
 
         body {
@@ -42,9 +71,30 @@
             z-index: 1000;
         }
 
+        .dropdown-header {
+            color: var(--primary-green);
+        }
+
+        .dropdown-item {
+            font-size: 0.9rem;
+        }
+
         .navbar-brand {
             font-weight: 700;
             color: var(--primary-green);
+            font-size: 1.8rem;
+        }
+
+        .navbar-brand:hover {
+            color: var(--secondary-green);
+        }
+
+        .notify {
+            background-color: var(--light-green);
+            padding: 10px;
+            border-radius: 50%;
+            height: 1.5rem;
+            width: 1.5rem;
         }
 
         .sidebar {
@@ -96,7 +146,7 @@
         }
 
         .priority-high {
-            border-left: 4px solid #d32f2f;
+            border-left: 4px solid var(--red-color);
         }
 
         .priority-medium {
@@ -125,6 +175,96 @@
             width: 250px !important;
         }
 
+        /* Add this to your style section */
+        .dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .sidebar,
+        .dark-mode .card,
+        .dark-mode .modal-content,
+        .dark-mode .offcanvas {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            border-color: #333;
+        }
+
+        .dark-mode .card-header,
+        .dark-mode .modal-header,
+        .dark-mode .offcanvas-header {
+            background-color: #252525;
+            border-color: #333;
+        }
+
+        .dark-mode .table,
+        .dark-mode .table th,
+        .dark-mode .table td {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            border-color: #333;
+        }
+
+        .dark-mode .table-hover tbody tr:hover {
+            background-color: #2a2a2a;
+            color: #ffffff;
+        }
+
+        .dark-mode .list-group-item {
+            background-color: #252525;
+            color: #e0e0e0;
+            border-color: #333;
+        }
+
+        .dark-mode .list-group-item-action:hover {
+            background-color: #2a2a2a;
+        }
+
+        .dark-mode .text-muted {
+            color: #9e9e9e !important;
+        }
+
+        .dark-mode .form-control,
+        .dark-mode .form-select {
+            background-color: #252525;
+            color: #e0e0e0;
+            border-color: #444;
+        }
+
+        .dark-mode .input-group-text {
+            background-color: #333;
+            color: #e0e0e0;
+            border-color: #444;
+        }
+
+        .dark-mode .dropdown-menu {
+            background-color: #252525;
+            border-color: #333;
+        }
+
+        .dark-mode .dropdown-item {
+            color: #e0e0e0;
+        }
+
+        .dark-mode .dropdown-item:hover {
+            background-color: #333;
+            color: #ffffff;
+        }
+
+        .dark-mode .nav-tabs .nav-link.active {
+            background-color: #252525;
+            color: #ffffff;
+            border-color: #333;
+        }
+
+        .dark-mode .nav-tabs .nav-link:not(.active) {
+            color: #9e9e9e;
+        }
+
+        .dark-mode .progress {
+            background-color: #333;
+        }
+
         @media (max-width: 991.98px) {
             .search-group {
                 width: auto !important;
@@ -140,6 +280,40 @@
                 width: 100%;
             }
         }
+
+        .counter {
+            background-color: var(--primary-green);
+        }
+
+        .search-group {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-group .form-control {
+            padding-right: 2.5rem;
+            border-radius: 0.25rem;
+            border: 1px solid #ced4da;
+            font-size: 0.9rem;
+        }
+
+        .search-group .fas.fa-search {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+
+        .search-group .form-control:focus {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 0.25rem rgba(81,179,48, 0.25);
+        }
+
+        .search-group:hover .fas.fa-search {
+            color: #495057;
+        }
+
     </style>
 </head>
 
@@ -152,48 +326,88 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <a class="navbar-brand" href="#">
-                <i class="fas fa-leaf me-2"></i>Agricure
+                <i class="fas fa-leaf me-2"></i> Crop Guard
             </a>
 
-            <div class="d-flex align-items-center">
-                <div class="input-group me-3 search-group" style="width: 300px;">
-                    <input type="text" class="form-control" placeholder="Search farmers or diseases...">
-                    <button class="btn btn-outline-success" type="button">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-
+            <div class="d-flex align-items-center gap-3">
                 <div class="dropdown me-3">
-                    <button class="btn btn-light position-relative" type="button" data-bs-toggle="dropdown"
-                        aria-label="Notifications">
-                        <i class="fas fa-bell text-muted"></i>
-                        <span
-                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger alert-counter">
+                    <a class="position-relative d-flex align-items-center" href="#" data-bs-toggle="dropdown"
+                        aria-label="Notifications (3 unread)" aria-expanded="false">
+                        <i class="fas fa-bell text-muted fs-5"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill counter">
                             3
+                            <span class="visually-hidden">unread notifications</span>
                         </span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm" style="min-width: 150px; ">
                         <li>
-                            <h6 class="dropdown-header">New Alerts</h6>
+                            <h6 class="dropdown-header fw-bold">Notifications</h6>
                         </li>
-                        <li><a class="dropdown-item" href="#">New disease reported in your region</a></li>
-                        <li><a class="dropdown-item" href="#">2 farmers need follow-up</a></li>
-                        <li><a class="dropdown-item" href="#">Weather alert: Heavy rain expected</a></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center gap-3 py-2" href="#">
+                                <i class="fas fa-virus text-danger"></i>
+                                <div>
+                                    <span class="fw-medium fs-10">New disease reported</span>
+                                    <small class="d-block text-muted">In your region · 2h ago</small>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center gap-3 py-2" href="#">
+                                <i class="fas fa-users text-warning"></i>
+                                <div>
+                                    <span class="fw-medium">2 farmers need follow-up</span>
+                                    <small class="d-block text-muted">Pending tasks · 5h ago</small>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center gap-3 py-2" href="#">
+                                <i class="fas fa-cloud-rain text-info"></i>
+                                <div>
+                                    <span class="fw-medium">Weather alert</span>
+                                    <small class="d-block text-muted">Heavy rain expected · 1d ago</small>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item text-center fw-medium"
+                                style="color: var(--primary-green); font-size: 0.9rem;" href="#">View all notifications
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
                 <div class="dropdown">
                     <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                        <img src="https://plus.unsplash.com/premium_photo-1661337029136-3a2221bd5099?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDZ8fHxlbnwwfHx8fHw%3D"
+                        <img src="https://plus.unsplash.com/premium_photo-1661337029136-3a2221bd5099?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDZ8fHxlbnwwfHx8fHw%3D"
                             class="rounded-circle me-1" alt="User Profile">
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                        <li>
+                            <a class="dropdown-item fw-medium" href="#">
+                                <i class="fas fa-user me-2"></i>Profile
+                            </a>
+                        </li>
+                        <li>
+                            <div class="form-check form-switch me-3">
+                                <input class="form-check-input" type="checkbox" id="themeSwitch">
+                                <label class="form-check-label" for="themeSwitch">
+                                    <i class="fas fa-moon"></i>
+                                </label>
+                            </div>
+                        </li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        <li>
+                            <a class="dropdown-item fw-medium" style="color: var(--red-color);" href="#">
+                                <i class="fas fa-sign-out-alt me-2 fs-6"></i>Logout
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -204,6 +418,10 @@
         <div class="row">
             <div class="col-lg-2 p-0 sidebar d-none d-lg-block">
                 <div class="p-3 mt-4">
+                    <div class="input-group me-3 search-group mb-4">
+                        <input type="text" class="form-control" placeholder="Search here...">
+                        <i class="fas fa-search"></i>
+                    </div>
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">
@@ -227,22 +445,12 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">
-                                <i class="fas fa-chart-line"></i> Analytics
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
                                 <i class="fas fa-book"></i> Knowledge Base
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">
-                                <i class="fas fa-users"></i> My Farmers
-                            </a>
-                        </li>
-                        <li class="nav-item mt-3">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-cog"></i> Settings
+                                <i class="fas fa-users me-2"></i> My Farmers
                             </a>
                         </li>
                     </ul>
@@ -251,16 +459,18 @@
 
             <!-- Main Content -->
             <div class="col-12 col-lg-10 py-3" role="main">
+
+                <!-- Beginning of Dashboard overview -->
                 <div class="row mb-4 mt-4">
-                    <div class="col-md-6">
-                        <h4>Agronomist Dashboard</h4>
+                    <div class="col-md-7">
+                        <h4>Dashboard Overview</h4>
                         <p class="text-muted">Welcome back! Here's what's happening in your region today.</p>
                     </div>
-                    <div class="col-md-6 text-md-end">
-                        <button class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#newReportModal">
+                    <div class="col-md-5 text-md-end">
+                        <button class="btn btn-success me-2 btn-green" data-bs-toggle="modal" data-bs-target="#newReportModal">
                             <i class="fas fa-plus me-1"></i> New Field Report
                         </button>
-                        <button class="btn btn-outline-success">
+                        <button class="btn btn-outline-success btn-green">
                             <i class="fas fa-calendar me-1"></i> Schedule Visit
                         </button>
                     </div>
@@ -279,7 +489,7 @@
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <div>
                                             <h6>Tomato Blight</h6>
-                                            <small class="text-muted">John's Farm • 5 miles away</small>
+                                            <small class="text-muted">John's Farm</small>
                                         </div>
                                         <button class="btn btn-sm btn-outline-danger">Review</button>
                                     </li>
@@ -433,7 +643,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <canvas id="diseaseChart" height="300"></canvas>
+                                        <canvas id="diseaseChart" height="150"></canvas>
                                     </div>
                                     <div class="col-md-4">
                                         <h5>Top 3 Current Issues</h5>
@@ -469,13 +679,1806 @@
                         </div>
                     </div>
                 </div>
+                <!-- End of Dashboard Overview -->
 
 
+                <!-- Beginning of Field report -->
+                <!-- Main Content - Field Reports Section -->
+                <div class="col-12 col-lg-10 py-3" role="main">
+                    <div class="row mb-4 mt-4">
+                        <div class="col-md-6">
+                            <h4><i class="fas fa-clipboard-list me-2"></i> Field Reports</h4>
+                            <p class="text-muted">View and manage all your field inspection reports</p>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <button class="btn btn-success me-2" data-bs-toggle="modal"
+                                data-bs-target="#newReportModal">
+                                <i class="fas fa-plus me-1"></i> New Report
+                            </button>
+                            <div class="btn-group">
+                                <button class="btn btn-outline-success dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown">
+                                    <i class="fas fa-download me-1"></i> Export
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-file-excel me-2"></i>
+                                            Excel</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-file-pdf me-2"></i> PDF</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-file-csv me-2"></i> CSV</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filter Row -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label class="form-label">Status</label>
+                                    <select class="form-select">
+                                        <option selected>All Statuses</option>
+                                        <option>Pending</option>
+                                        <option>In Progress</option>
+                                        <option>Completed</option>
+                                        <option>Urgent</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Date Range</label>
+                                    <select class="form-select">
+                                        <option selected>All Time</option>
+                                        <option>Today</option>
+                                        <option>This Week</option>
+                                        <option>This Month</option>
+                                        <option>Custom Range</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Crop Type</label>
+                                    <select class="form-select">
+                                        <option selected>All Crops</option>
+                                        <option>Tomatoes</option>
+                                        <option>Corn</option>
+                                        <option>Wheat</option>
+                                        <option>Potatoes</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Farmer</label>
+                                    <select class="form-select">
+                                        <option selected>All Farmers</option>
+                                        <option>John Kamau</option>
+                                        <option>Mary Wanjiku</option>
+                                        <option>Peter Mwangi</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 text-end">
+                                    <button class="btn btn-outline-secondary me-2">
+                                        <i class="fas fa-filter me-1"></i> Apply Filters
+                                    </button>
+                                    <button class="btn btn-outline-danger">
+                                        <i class="fas fa-times me-1"></i> Clear
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reports Summary Cards -->
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="card border-start border-primary border-4">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h6 class="text-muted">Total Reports</h6>
+                                            <h3>127</h3>
+                                        </div>
+                                        <div class="bg-primary bg-opacity-10 p-3 rounded">
+                                            <i class="fas fa-file-alt text-primary"></i>
+                                        </div>
+                                    </div>
+                                    <small class="text-success"><i class="fas fa-arrow-up me-1"></i> 8% from last
+                                        month</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card border-start border-warning border-4">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h6 class="text-muted">Pending Review</h6>
+                                            <h3>14</h3>
+                                        </div>
+                                        <div class="bg-warning bg-opacity-10 p-3 rounded">
+                                            <i class="fas fa-clock text-warning"></i>
+                                        </div>
+                                    </div>
+                                    <small class="text-danger"><i class="fas fa-arrow-up me-1"></i> 3 new today</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card border-start border-danger border-4">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h6 class="text-muted">Urgent Cases</h6>
+                                            <h3>5</h3>
+                                        </div>
+                                        <div class="bg-danger bg-opacity-10 p-3 rounded">
+                                            <i class="fas fa-exclamation-triangle text-danger"></i>
+                                        </div>
+                                    </div>
+                                    <small class="text-danger"><i class="fas fa-bell me-1"></i> Needs attention</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card border-start border-success border-4">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h6 class="text-muted">Resolved</h6>
+                                            <h3>98</h3>
+                                        </div>
+                                        <div class="bg-success bg-opacity-10 p-3 rounded">
+                                            <i class="fas fa-check-circle text-success"></i>
+                                        </div>
+                                    </div>
+                                    <small class="text-success"><i class="fas fa-check me-1"></i> 85% resolution
+                                        rate</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reports Table -->
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <div>
+                                <span>Recent Field Reports</span>
+                                <span class="badge bg-primary ms-2">127</span>
+                            </div>
+                            <div class="d-flex">
+                                <div class="input-group me-3" style="width: 250px;">
+                                    <input type="text" class="form-control" placeholder="Search reports...">
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                                        data-bs-toggle="dropdown">
+                                        <i class="fas fa-sort me-1"></i> Sort By
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="#">Newest First</a></li>
+                                        <li><a class="dropdown-item" href="#">Oldest First</a></li>
+                                        <li><a class="dropdown-item" href="#">Priority (High to Low)</a></li>
+                                        <li><a class="dropdown-item" href="#">Status</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Report ID</th>
+                                            <th>Farmer</th>
+                                            <th>Crop</th>
+                                            <th>Issue</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                            <th>Priority</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Report 1 -->
+                                        <tr class="priority-high">
+                                            <td>FR-2023-0425</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="https://randomuser.me/api/portraits/men/32.jpg"
+                                                        class="rounded-circle me-2" width="32" height="32" alt="Farmer">
+                                                    <span>John Kamau</span>
+                                                </div>
+                                            </td>
+                                            <td>Tomatoes</td>
+                                            <td>Late Blight</td>
+                                            <td>
+                                                <small>Today</small>
+                                                <div class="text-muted">10:30 AM</div>
+                                            </td>
+                                            <td><span class="badge bg-warning">Pending</span></td>
+                                            <td><span class="badge bg-danger">High</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary me-1" title="View"
+                                                    data-bs-toggle="modal" data-bs-target="#reportDetailModal">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Report 2 -->
+                                        <tr class="priority-medium">
+                                            <td>FR-2023-0424</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="https://randomuser.me/api/portraits/women/44.jpg"
+                                                        class="rounded-circle me-2" width="32" height="32" alt="Farmer">
+                                                    <span>Mary Wanjiku</span>
+                                                </div>
+                                            </td>
+                                            <td>Maize</td>
+                                            <td>Fall Armyworm</td>
+                                            <td>
+                                                <small>Yesterday</small>
+                                                <div class="text-muted">2:15 PM</div>
+                                            </td>
+                                            <td><span class="badge bg-info">In Progress</span></td>
+                                            <td><span class="badge bg-warning">Medium</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary me-1" title="View"
+                                                    data-bs-toggle="modal" data-bs-target="#reportDetailModal">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Report 3 -->
+                                        <tr>
+                                            <td>FR-2023-0422</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="https://randomuser.me/api/portraits/men/67.jpg"
+                                                        class="rounded-circle me-2" width="32" height="32" alt="Farmer">
+                                                    <span>Peter Mwangi</span>
+                                                </div>
+                                            </td>
+                                            <td>Coffee</td>
+                                            <td>Berry Disease</td>
+                                            <td>
+                                                <small>Apr 22, 2023</small>
+                                                <div class="text-muted">9:45 AM</div>
+                                            </td>
+                                            <td><span class="badge bg-success">Resolved</span></td>
+                                            <td><span class="badge bg-primary">Low</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary me-1" title="View"
+                                                    data-bs-toggle="modal" data-bs-target="#reportDetailModal">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Report 4 -->
+                                        <tr class="priority-high">
+                                            <td>FR-2023-0420</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="https://randomuser.me/api/portraits/men/45.jpg"
+                                                        class="rounded-circle me-2" width="32" height="32" alt="Farmer">
+                                                    <span>James Omondi</span>
+                                                </div>
+                                            </td>
+                                            <td>Kale</td>
+                                            <td>Aphid Infestation</td>
+                                            <td>
+                                                <small>Apr 20, 2023</small>
+                                                <div class="text-muted">11:20 AM</div>
+                                            </td>
+                                            <td><span class="badge bg-danger">Urgent</span></td>
+                                            <td><span class="badge bg-danger">High</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary me-1" title="View"
+                                                    data-bs-toggle="modal" data-bs-target="#reportDetailModal">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Pagination -->
+                            <div class="d-flex justify-content-between align-items-center p-3 border-top">
+                                <div>
+                                    <small class="text-muted">Showing <strong>1-10</strong> of <strong>127</strong>
+                                        reports</small>
+                                </div>
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination pagination-sm mb-0">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1"
+                                                aria-disabled="true">Previous</a>
+                                        </li>
+                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Section -->
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span>Reports by Status</span>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="statusChart" height="250"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span>Common Issues</span>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="issuesChart" height="250"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of Field Report -->
+
+
+                <!-- Main Content - Diagnosis Tools Section -->
+                <div class="col-12 col-lg-10 py-3" role="main">
+                    <div class="row mb-4 mt-4">
+                        <div class="col-md-6">
+                            <h4><i class="fas fa-diagnoses me-2"></i> Crop Diagnosis Tools</h4>
+                            <p class="text-muted">Identify crop diseases and get treatment recommendations</p>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <button class="btn btn-success me-2">
+                                <i class="fas fa-history me-1"></i> Diagnosis History
+                            </button>
+                            <button class="btn btn-outline-success">
+                                <i class="fas fa-book me-1"></i> Disease Library
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Diagnosis Methods Cards -->
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <div class="bg-success bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
+                                        <i class="fas fa-camera fa-3x text-success"></i>
+                                    </div>
+                                    <h5>Image Diagnosis</h5>
+                                    <p class="text-muted">Upload photos of affected crops for AI-powered analysis</p>
+                                    <button class="btn btn-success w-100 mt-3" data-bs-toggle="modal"
+                                        data-bs-target="#imageDiagnosisModal">
+                                        <i class="fas fa-upload me-1"></i> Upload Images
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <div class="bg-primary bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
+                                        <i class="fas fa-clipboard-question fa-3x text-primary"></i>
+                                    </div>
+                                    <h5>Symptom Checker</h5>
+                                    <p class="text-muted">Answer questions about crop symptoms to identify potential
+                                        issues</p>
+                                    <button class="btn btn-primary w-100 mt-3" data-bs-toggle="modal"
+                                        data-bs-target="#symptomCheckerModal">
+                                        <i class="fas fa-play me-1"></i> Start Diagnosis
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <div class="bg-warning bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
+                                        <i class="fas fa-vial fa-3x text-warning"></i>
+                                    </div>
+                                    <h5>Lab Test Analysis</h5>
+                                    <p class="text-muted">Enter lab test results for professional diagnosis</p>
+                                    <button class="btn btn-warning w-100 mt-3" data-bs-toggle="modal"
+                                        data-bs-target="#labTestModal">
+                                        <i class="fas fa-flask me-1"></i> Enter Results
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Diagnoses -->
+                    <div class="card mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <div>
+                                <span>Recent Diagnoses</span>
+                                <span class="badge bg-primary ms-2">24</span>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown">
+                                    <i class="fas fa-filter me-1"></i> Filter
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="#">All Diagnoses</a></li>
+                                    <li><a class="dropdown-item" href="#">Last 7 Days</a></li>
+                                    <li><a class="dropdown-item" href="#">High Confidence</a></li>
+                                    <li><a class="dropdown-item" href="#">Needs Review</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Crop</th>
+                                            <th>Diagnosis</th>
+                                            <th>Confidence</th>
+                                            <th>Method</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Diagnosis 1 -->
+                                        <tr>
+                                            <td>
+                                                <small>Today</small>
+                                                <div class="text-muted">10:30 AM</div>
+                                            </td>
+                                            <td>Tomatoes</td>
+                                            <td>
+                                                <strong>Late Blight</strong>
+                                                <div class="text-muted small">Phytophthora infestans</div>
+                                            </td>
+                                            <td>
+                                                <div class="progress" style="height: 6px;">
+                                                    <div class="progress-bar bg-success" style="width: 92%"></div>
+                                                </div>
+                                                <small>92% confidence</small>
+                                            </td>
+                                            <td><span class="badge bg-success">Image Analysis</span></td>
+                                            <td><span class="badge bg-success">Confirmed</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary me-1" title="View">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary" title="Save Report">
+                                                    <i class="fas fa-save"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Diagnosis 2 -->
+                                        <tr>
+                                            <td>
+                                                <small>Yesterday</small>
+                                                <div class="text-muted">2:15 PM</div>
+                                            </td>
+                                            <td>Maize</td>
+                                            <td>
+                                                <strong>Fall Armyworm</strong>
+                                                <div class="text-muted small">Spodoptera frugiperda</div>
+                                            </td>
+                                            <td>
+                                                <div class="progress" style="height: 6px;">
+                                                    <div class="progress-bar bg-warning" style="width: 78%"></div>
+                                                </div>
+                                                <small>78% confidence</small>
+                                            </td>
+                                            <td><span class="badge bg-primary">Symptom Checker</span></td>
+                                            <td><span class="badge bg-info">Pending Review</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary me-1" title="View">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary" title="Save Report">
+                                                    <i class="fas fa-save"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Diagnosis 3 -->
+                                        <tr>
+                                            <td>
+                                                <small>Apr 22, 2023</small>
+                                                <div class="text-muted">9:45 AM</div>
+                                            </td>
+                                            <td>Coffee</td>
+                                            <td>
+                                                <strong>Coffee Berry Disease</strong>
+                                                <div class="text-muted small">Colletotrichum kahawae</div>
+                                            </td>
+                                            <td>
+                                                <div class="progress" style="height: 6px;">
+                                                    <div class="progress-bar bg-success" style="width: 95%"></div>
+                                                </div>
+                                                <small>95% confidence</small>
+                                            </td>
+                                            <td><span class="badge bg-warning">Lab Test</span></td>
+                                            <td><span class="badge bg-success">Confirmed</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary me-1" title="View">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary" title="Save Report">
+                                                    <i class="fas fa-save"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Pagination -->
+                            <div class="d-flex justify-content-between align-items-center p-3 border-top">
+                                <div>
+                                    <small class="text-muted">Showing <strong>1-10</strong> of <strong>24</strong>
+                                        diagnoses</small>
+                                </div>
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination pagination-sm mb-0">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1"
+                                                aria-disabled="true">Previous</a>
+                                        </li>
+                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Disease Trends -->
+                    <div class="card">
+                        <div class="card-header">
+                            <span>Common Diseases in Your Region</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <canvas id="diseaseTrendsChart" height="200"></canvas>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="alert alert-warning">
+                                        <i class="fas fa-exclamation-triangle me-2"></i>
+                                        <strong>Seasonal Alert:</strong> Increased risk of Late Blight in tomatoes due
+                                        to recent rainfall
+                                    </div>
+                                    <h5>Top Diseases This Month</h5>
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="d-flex justify-content-between">
+                                                <span>Tomato Late Blight</span>
+                                                <span class="badge bg-danger">High Risk</span>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="d-flex justify-content-between">
+                                                <span>Maize Rust</span>
+                                                <span class="badge bg-warning">Moderate Risk</span>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="d-flex justify-content-between">
+                                                <span>Coffee Berry Disease</span>
+                                                <span class="badge bg-primary">Low Risk</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Diagnosis Modal -->
+                <div class="modal fade" id="imageDiagnosisModal" tabindex="-1"
+                    aria-labelledby="imageDiagnosisModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="imageDiagnosisModalLabel">Image Diagnosis</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="border rounded p-4 text-center bg-light mb-4" style="min-height: 200px;">
+                                    <i class="fas fa-images fa-3x text-muted mb-3"></i>
+                                    <p class="text-muted">Upload clear photos of affected leaves, stems, and fruits</p>
+                                    <input type="file" class="form-control" id="cropImages" multiple accept="image/*">
+                                    <small class="text-muted">Maximum 5 images (JPEG, PNG)</small>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Crop Information</label>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <select class="form-select">
+                                                <option selected disabled>Select Crop</option>
+                                                <option>Tomatoes</option>
+                                                <option>Maize</option>
+                                                <option>Wheat</option>
+                                                <option>Coffee</option>
+                                                <option>Potatoes</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select class="form-select">
+                                                <option selected disabled>Growth Stage</option>
+                                                <option>Seedling</option>
+                                                <option>Vegetative</option>
+                                                <option>Flowering</option>
+                                                <option>Fruiting</option>
+                                                <option>Harvest</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Additional Notes</label>
+                                    <textarea class="form-control" rows="3"
+                                        placeholder="Describe symptoms, weather conditions, etc."></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-success">
+                                    <i class="fas fa-search me-1"></i> Analyze Images
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Symptom Checker Modal -->
+                <div class="modal fade" id="symptomCheckerModal" tabindex="-1"
+                    aria-labelledby="symptomCheckerModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="symptomCheckerModalLabel">Symptom Checker</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="steps">
+                                    <div class="step active" id="step1">
+                                        <h6>Step 1: Select Crop</h6>
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <div class="form-check card p-3">
+                                                    <input class="form-check-input" type="radio" name="cropType"
+                                                        id="tomatoes" checked>
+                                                    <label class="form-check-label" for="tomatoes">
+                                                        <i class="fas fa-apple-alt me-2 text-danger"></i> Tomatoes
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-check card p-3">
+                                                    <input class="form-check-input" type="radio" name="cropType"
+                                                        id="maize">
+                                                    <label class="form-check-label" for="maize">
+                                                        <i class="fas fa-seedling me-2 text-warning"></i> Maize
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-check card p-3">
+                                                    <input class="form-check-input" type="radio" name="cropType"
+                                                        id="wheat">
+                                                    <label class="form-check-label" for="wheat">
+                                                        <i class="fas fa-wheat-awn me-2 text-success"></i> Wheat
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-check card p-3">
+                                                    <input class="form-check-input" type="radio" name="cropType"
+                                                        id="coffee">
+                                                    <label class="form-check-label" for="coffee">
+                                                        <i class="fas fa-mug-hot me-2 text-brown"></i> Coffee
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="step" id="step2" style="display:none;">
+                                        <h6>Step 2: Describe Symptoms</h6>
+                                        <div class="mb-3">
+                                            <label class="form-label">Select affected plant parts:</label>
+                                            <div class="row g-2">
+                                                <div class="col-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="leaves">
+                                                        <label class="form-check-label" for="leaves">
+                                                            <i class="fas fa-leaf me-1"></i> Leaves
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="stems">
+                                                        <label class="form-check-label" for="stems">
+                                                            <i class="fas fa-tree me-1"></i> Stems
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="fruits">
+                                                        <label class="form-check-label" for="fruits">
+                                                            <i class="fas fa-apple-alt me-1"></i> Fruits
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="roots">
+                                                        <label class="form-check-label" for="roots">
+                                                            <i class="fas fa-root me-1"></i> Roots
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="flowers">
+                                                        <label class="form-check-label" for="flowers">
+                                                            <i class="fas fa-spa me-1"></i> Flowers
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Select visible symptoms:</label>
+                                            <div class="row g-2">
+                                                <div class="col-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="spots">
+                                                        <label class="form-check-label" for="spots">
+                                                            <i class="fas fa-circle me-1 text-danger"></i> Spots
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="wilting">
+                                                        <label class="form-check-label" for="wilting">
+                                                            <i class="fas fa-tint-slash me-1 text-warning"></i> Wilting
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            id="discoloration">
+                                                        <label class="form-check-label" for="discoloration">
+                                                            <i class="fas fa-palette me-1 text-success"></i>
+                                                            Discoloration
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="mold">
+                                                        <label class="form-check-label" for="mold">
+                                                            <i class="fas fa-cloud me-1 text-secondary"></i> Mold
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="holes">
+                                                        <label class="form-check-label" for="holes">
+                                                            <i class="fas fa-cut me-1 text-dark"></i> Holes
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Additional Notes</label>
+                                            <textarea class="form-control" rows="3"
+                                                placeholder="Describe the symptoms in detail"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="step" id="step3" style="display:none;">
+                                        <h6>Step 3: Environmental Conditions</h6>
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label">Recent Weather</label>
+                                                <select class="form-select">
+                                                    <option selected disabled>Select weather pattern</option>
+                                                    <option>Dry and sunny</option>
+                                                    <option>Rainy/humid</option>
+                                                    <option>Cool temperatures</option>
+                                                    <option>Hot temperatures</option>
+                                                    <option>Variable weather</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Soil Conditions</label>
+                                                <select class="form-select">
+                                                    <option selected disabled>Select soil condition</option>
+                                                    <option>Well-drained</option>
+                                                    <option>Waterlogged</option>
+                                                    <option>Dry</option>
+                                                    <option>Rich organic matter</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="nearbyIssues">
+                                                    <label class="form-check-label" for="nearbyIssues">
+                                                        Are nearby plants showing similar symptoms?
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-outline-secondary" id="prevBtn"
+                                    style="display:none;">
+                                    <i class="fas fa-arrow-left me-1"></i> Previous
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" id="nextBtn">
+                                    Next <i class="fas fa-arrow-right ms-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Beginning of My Farmers sections -->
+                <div class="row mb-4 mt-4">
+                    <div class="col-md-6">
+                        <h4><i class="fas fa-users me-2"></i> My Farmers</h4>
+                        <p class="text-muted">Manage your assigned farmers and their farm details</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <button class="btn btn-success me-2">
+                            <i class="fas fa-plus me-1"></i> Add New Farmer
+                        </button>
+                        <button class="btn btn-outline-success">
+                            <i class="fas fa-filter me-1"></i> Filters
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Farmer Statistics Cards -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="card border-start border-primary border-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h6 class="text-muted">Total Farmers</h6>
+                                        <h3>42</h3>
+                                    </div>
+                                    <div class="bg-primary bg-opacity-10 p-3 rounded">
+                                        <i class="fas fa-users text-primary"></i>
+                                    </div>
+                                </div>
+                                <small class="text-success"><i class="fas fa-arrow-up me-1"></i> 12% from last
+                                    month</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card border-start border-success border-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h6 class="text-muted">Active Farms</h6>
+                                        <h3>36</h3>
+                                    </div>
+                                    <div class="bg-success bg-opacity-10 p-3 rounded">
+                                        <i class="fas fa-tractor text-success"></i>
+                                    </div>
+                                </div>
+                                <small class="text-success"><i class="fas fa-arrow-up me-1"></i> 8% from last
+                                    month</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card border-start border-warning border-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h6 class="text-muted">Pending Issues</h6>
+                                        <h3>7</h3>
+                                    </div>
+                                    <div class="bg-warning bg-opacity-10 p-3 rounded">
+                                        <i class="fas fa-exclamation-triangle text-warning"></i>
+                                    </div>
+                                </div>
+                                <small class="text-danger"><i class="fas fa-arrow-down me-1"></i> 2 from last
+                                    week</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card border-start border-info border-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h6 class="text-muted">Upcoming Visits</h6>
+                                        <h3>5</h3>
+                                    </div>
+                                    <div class="bg-info bg-opacity-10 p-3 rounded">
+                                        <i class="fas fa-calendar-check text-info"></i>
+                                    </div>
+                                </div>
+                                <small class="text-success"><i class="fas fa-bell me-1"></i> 2 this week</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Farmer List Section -->
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div>
+                            <span>All Assigned Farmers</span>
+                            <span class="badge bg-primary ms-2">42</span>
+                        </div>
+                        <div class="d-flex">
+                            <div class="input-group me-3" style="width: 250px;">
+                                <input type="text" class="form-control" placeholder="Search farmers...">
+                                <button class="btn btn-outline-secondary" type="button">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown">
+                                    <i class="fas fa-filter me-1"></i> Filter
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <h6 class="dropdown-header">Filter By</h6>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">All Farmers</a></li>
+                                    <li><a class="dropdown-item" href="#">Active Only</a></li>
+                                    <li><a class="dropdown-item" href="#">With Issues</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">By Location</a></li>
+                                    <li><a class="dropdown-item" href="#">By Crop Type</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th style="width: 50px;"></th>
+                                        <th>Farmer Name</th>
+                                        <th>Location</th>
+                                        <th>Main Crops</th>
+                                        <th>Farm Size</th>
+                                        <th>Last Visit</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Farmer 1 -->
+                                    <tr>
+                                        <td>
+                                            <img src="https://randomuser.me/api/portraits/men/32.jpg"
+                                                class="rounded-circle" width="40" height="40" alt="Farmer">
+                                        </td>
+                                        <td>
+                                            <h6 class="mb-0">John Kamau</h6>
+                                            <small class="text-muted">+254 712 345 678</small>
+                                        </td>
+                                        <td>Nairobi West</td>
+                                        <td>
+                                            <span
+                                                class="badge bg-success bg-opacity-10 text-success me-1">Tomatoes</span>
+                                            <span class="badge bg-primary bg-opacity-10 text-primary">Kale</span>
+                                        </td>
+                                        <td>2.5 acres</td>
+                                        <td>
+                                            <small>2 days ago</small>
+                                            <div class="text-warning">
+                                                <i class="fas fa-exclamation-circle"></i> Needs follow-up
+                                            </div>
+                                        </td>
+                                        <td><span class="badge bg-success">Active</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary me-1" title="View">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary me-1" title="Message">
+                                                <i class="fas fa-comment"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-success" title="Schedule Visit">
+                                                <i class="fas fa-calendar-plus"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Farmer 2 -->
+                                    <tr>
+                                        <td>
+                                            <img src="https://randomuser.me/api/portraits/women/44.jpg"
+                                                class="rounded-circle" width="40" height="40" alt="Farmer">
+                                        </td>
+                                        <td>
+                                            <h6 class="mb-0">Mary Wanjiku</h6>
+                                            <small class="text-muted">+254 723 456 789</small>
+                                        </td>
+                                        <td>Kiambu</td>
+                                        <td>
+                                            <span class="badge bg-warning bg-opacity-10 text-warning me-1">Maize</span>
+                                            <span class="badge bg-info bg-opacity-10 text-info">Beans</span>
+                                        </td>
+                                        <td>5 acres</td>
+                                        <td>
+                                            <small>1 week ago</small>
+                                        </td>
+                                        <td><span class="badge bg-success">Active</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary me-1" title="View">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary me-1" title="Message">
+                                                <i class="fas fa-comment"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-success" title="Schedule Visit">
+                                                <i class="fas fa-calendar-plus"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Farmer 3 -->
+                                    <tr>
+                                        <td>
+                                            <img src="https://randomuser.me/api/portraits/men/67.jpg"
+                                                class="rounded-circle" width="40" height="40" alt="Farmer">
+                                        </td>
+                                        <td>
+                                            <h6 class="mb-0">Peter Mwangi</h6>
+                                            <small class="text-muted">+254 734 567 890</small>
+                                        </td>
+                                        <td>Thika</td>
+                                        <td>
+                                            <span class="badge bg-danger bg-opacity-10 text-danger me-1">Coffee</span>
+                                            <span
+                                                class="badge bg-secondary bg-opacity-10 text-secondary">Macadamia</span>
+                                        </td>
+                                        <td>8 acres</td>
+                                        <td>
+                                            <small>3 weeks ago</small>
+                                            <div class="text-danger">
+                                                <i class="fas fa-exclamation-triangle"></i> Urgent visit needed
+                                            </div>
+                                        </td>
+                                        <td><span class="badge bg-warning">Needs Attention</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary me-1" title="View">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary me-1" title="Message">
+                                                <i class="fas fa-comment"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-success" title="Schedule Visit">
+                                                <i class="fas fa-calendar-plus"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Additional farmers would go here -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="d-flex justify-content-between align-items-center p-3 border-top">
+                            <div>
+                                <small class="text-muted">Showing <strong>1-10</strong> of <strong>42</strong>
+                                    farmers</small>
+                            </div>
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination pagination-sm mb-0">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map View Card (optional) -->
+                <div class="card mt-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Farmer Locations</span>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown">
+                                <i class="fas fa-layer-group me-1"></i> Map Layers
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">All Farmers</a></li>
+                                <li><a class="dropdown-item" href="#">With Issues</a></li>
+                                <li><a class="dropdown-item" href="#">By Crop Type</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div id="farmerMap" style="height: 300px;"></div>
+                    </div>
+                </div>
+
+                <!-- End of my farmer section -->
             </div>
         </div>
     </div>
 
-    <!-- Add this modal at the bottom of your HTML, before the scripts -->
+    <!-- Main Content - Advisory Center Section -->
+    <div class="col-12 col-lg-10 py-3" role="main">
+        <div class="row mb-4 mt-4">
+            <div class="col-md-6">
+                <h4><i class="fas fa-comment-medical me-2"></i> Advisory Center</h4>
+                <p class="text-muted">Create and manage agricultural advisories for your farmers</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <button class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#newAdvisoryModal">
+                    <i class="fas fa-plus me-1"></i> New Advisory
+                </button>
+                <button class="btn btn-outline-success">
+                    <i class="fas fa-bullhorn me-1"></i> Broadcast
+                </button>
+            </div>
+        </div>
+
+        <!-- Advisory Summary Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card border-start border-primary border-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6 class="text-muted">Active Advisories</h6>
+                                <h3>18</h3>
+                            </div>
+                            <div class="bg-primary bg-opacity-10 p-3 rounded">
+                                <i class="fas fa-bell text-primary"></i>
+                            </div>
+                        </div>
+                        <small class="text-success"><i class="fas fa-arrow-up me-1"></i> 5 new this week</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-start border-success border-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6 class="text-muted">Farmer Reach</h6>
+                                <h3>142</h3>
+                            </div>
+                            <div class="bg-success bg-opacity-10 p-3 rounded">
+                                <i class="fas fa-users text-success"></i>
+                            </div>
+                        </div>
+                        <small class="text-success">85% open rate</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-start border-warning border-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6 class="text-muted">Pending Responses</h6>
+                                <h3>7</h3>
+                            </div>
+                            <div class="bg-warning bg-opacity-10 p-3 rounded">
+                                <i class="fas fa-comments text-warning"></i>
+                            </div>
+                        </div>
+                        <small class="text-danger"><i class="fas fa-clock me-1"></i> Needs follow-up</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-start border-info border-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6 class="text-muted">Templates</h6>
+                                <h3>24</h3>
+                            </div>
+                            <div class="bg-info bg-opacity-10 p-3 rounded">
+                                <i class="fas fa-file-alt text-info"></i>
+                            </div>
+                        </div>
+                        <small class="text-primary">Ready to use</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advisory Management Tabs -->
+        <div class="card">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" id="advisoryTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="active-tab" data-bs-toggle="tab" data-bs-target="#active"
+                            type="button" role="tab">
+                            <i class="fas fa-bell me-1"></i> Active Advisories
+                            <span class="badge bg-primary ms-1">18</span>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="drafts-tab" data-bs-toggle="tab" data-bs-target="#drafts"
+                            type="button" role="tab">
+                            <i class="fas fa-file me-1"></i> Drafts
+                            <span class="badge bg-secondary ms-1">5</span>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="templates-tab" data-bs-toggle="tab" data-bs-target="#templates"
+                            type="button" role="tab">
+                            <i class="fas fa-copy me-1"></i> Templates
+                            <span class="badge bg-info ms-1">24</span>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="archive-tab" data-bs-toggle="tab" data-bs-target="#archive"
+                            type="button" role="tab">
+                            <i class="fas fa-archive me-1"></i> Archive
+                            <span class="badge bg-dark ms-1">56</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body p-0">
+                <div class="tab-content" id="advisoryTabsContent">
+                    <!-- Active Advisories Tab -->
+                    <div class="tab-pane fade show active" id="active" role="tabpanel">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Advisory Title</th>
+                                        <th>Type</th>
+                                        <th>Farmers</th>
+                                        <th>Sent</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Advisory 1 -->
+                                    <tr>
+                                        <td>
+                                            <strong>Tomato Blight Alert</strong>
+                                            <div class="text-muted small">Preventive measures for late blight</div>
+                                        </td>
+                                        <td><span class="badge bg-danger">Disease Alert</span></td>
+                                        <td>
+                                            <div class="avatar-group">
+                                                <img src="https://randomuser.me/api/portraits/men/32.jpg"
+                                                    class="rounded-circle" width="30" height="30" alt="Farmer"
+                                                    data-bs-toggle="tooltip" title="John Kamau">
+                                                <img src="https://randomuser.me/api/portraits/women/44.jpg"
+                                                    class="rounded-circle" width="30" height="30" alt="Farmer"
+                                                    data-bs-toggle="tooltip" title="Mary Wanjiku">
+                                                <span class="small">+12 more</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <small>Today</small>
+                                            <div class="text-muted">10:30 AM</div>
+                                        </td>
+                                        <td>
+                                            <div class="progress" style="height: 6px;">
+                                                <div class="progress-bar bg-success" style="width: 85%"></div>
+                                            </div>
+                                            <small>85% read</small>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary me-1" title="View">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary me-1" title="Stats">
+                                                <i class="fas fa-chart-bar"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-success" title="Resend">
+                                                <i class="fas fa-paper-plane"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Advisory 2 -->
+                                    <tr>
+                                        <td>
+                                            <strong>Heavy Rain Advisory</strong>
+                                            <div class="text-muted small">Flood prevention measures</div>
+                                        </td>
+                                        <td><span class="badge bg-primary">Weather Alert</span></td>
+                                        <td>All Farmers</td>
+                                        <td>
+                                            <small>Yesterday</small>
+                                            <div class="text-muted">2:15 PM</div>
+                                        </td>
+                                        <td>
+                                            <div class="progress" style="height: 6px;">
+                                                <div class="progress-bar bg-warning" style="width: 65%"></div>
+                                            </div>
+                                            <small>65% read</small>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary me-1" title="View">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary me-1" title="Stats">
+                                                <i class="fas fa-chart-bar"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-success" title="Resend">
+                                                <i class="fas fa-paper-plane"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Advisory 3 -->
+                                    <tr>
+                                        <td>
+                                            <strong>Fertilizer Application Guide</strong>
+                                            <div class="text-muted small">Spring fertilization schedule</div>
+                                        </td>
+                                        <td><span class="badge bg-success">Best Practice</span></td>
+                                        <td>
+                                            <div class="avatar-group">
+                                                <img src="https://randomuser.me/api/portraits/men/67.jpg"
+                                                    class="rounded-circle" width="30" height="30" alt="Farmer"
+                                                    data-bs-toggle="tooltip" title="Peter Mwangi">
+                                                <span class="small">+8 more</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <small>Apr 22, 2023</small>
+                                            <div class="text-muted">9:45 AM</div>
+                                        </td>
+                                        <td>
+                                            <div class="progress" style="height: 6px;">
+                                                <div class="progress-bar bg-success" style="width: 92%"></div>
+                                            </div>
+                                            <small>92% read</small>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary me-1" title="View">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary me-1" title="Stats">
+                                                <i class="fas fa-chart-bar"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-success" title="Resend">
+                                                <i class="fas fa-paper-plane"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="d-flex justify-content-between align-items-center p-3 border-top">
+                            <div>
+                                <small class="text-muted">Showing <strong>1-10</strong> of <strong>18</strong> active
+                                    advisories</small>
+                            </div>
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination pagination-sm mb-0">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- Drafts Tab -->
+                    <div class="tab-pane fade" id="drafts" role="tabpanel">
+                        <div class="p-4 text-center">
+                            <i class="fas fa-file-alt fa-3x text-muted mb-3"></i>
+                            <h5>Draft Advisories</h5>
+                            <p class="text-muted">You have 5 draft advisories ready to complete and send</p>
+                            <button class="btn btn-primary">
+                                <i class="fas fa-eye me-1"></i> View Drafts
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Templates Tab -->
+                    <div class="tab-pane fade" id="templates" role="tabpanel">
+                        <div class="p-3">
+                            <div class="row">
+                                <!-- Template 1 -->
+                                <div class="col-md-4 mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span class="badge bg-success">Disease Alert</span>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="far fa-copy"></i>
+                                                </button>
+                                            </div>
+                                            <h6>Tomato Blight Advisory</h6>
+                                            <p class="small text-muted">Preventive measures and treatment options for
+                                                late blight</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <small class="text-muted">Last used: 2 days ago</small>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-paper-plane"></i> Use
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Template 2 -->
+                                <div class="col-md-4 mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span class="badge bg-primary">Weather Alert</span>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="far fa-copy"></i>
+                                                </button>
+                                            </div>
+                                            <h6>Heavy Rain Advisory</h6>
+                                            <p class="small text-muted">Flood prevention and crop protection measures
+                                            </p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <small class="text-muted">Last used: 1 week ago</small>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-paper-plane"></i> Use
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Template 3 -->
+                                <div class="col-md-4 mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span class="badge bg-warning">Pest Alert</span>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="far fa-copy"></i>
+                                                </button>
+                                            </div>
+                                            <h6>Fall Armyworm Advisory</h6>
+                                            <p class="small text-muted">Identification and control measures for armyworm
+                                            </p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <small class="text-muted">Last used: 3 weeks ago</small>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-paper-plane"></i> Use
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Archive Tab -->
+                    <div class="tab-pane fade" id="archive" role="tabpanel">
+                        <div class="p-4 text-center">
+                            <i class="fas fa-archive fa-3x text-muted mb-3"></i>
+                            <h5>Archived Advisories</h5>
+                            <p class="text-muted">Browse through 56 past advisories sent to farmers</p>
+                            <button class="btn btn-primary">
+                                <i class="fas fa-search me-1"></i> Browse Archive
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Farmer Responses -->
+        <div class="card mt-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div>
+                    <span>Farmer Responses</span>
+                    <span class="badge bg-primary ms-2">14</span>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-filter me-1"></i> Filter
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">All Responses</a></li>
+                        <li><a class="dropdown-item" href="#">Questions</a></li>
+                        <li><a class="dropdown-item" href="#">Feedback</a></li>
+                        <li><a class="dropdown-item" href="#">Unread</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush">
+                    <!-- Response 1 -->
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle me-3"
+                                    width="40" height="40" alt="Farmer">
+                                <div>
+                                    <h6 class="mb-0">John Kamau</h6>
+                                    <small class="text-muted">Regarding: Tomato Blight Alert</small>
+                                </div>
+                            </div>
+                            <div>
+                                <small class="text-muted">Today, 11:45 AM</small>
+                                <span class="badge bg-warning ms-2">Unread</span>
+                            </div>
+                        </div>
+                        <p class="mb-1 mt-2">The fungicide you recommended isn't available locally. What alternatives
+                            can I use?</p>
+                    </a>
+
+                    <!-- Response 2 -->
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="rounded-circle me-3"
+                                    width="40" height="40" alt="Farmer">
+                                <div>
+                                    <h6 class="mb-0">Mary Wanjiku</h6>
+                                    <small class="text-muted">Regarding: Heavy Rain Advisory</small>
+                                </div>
+                            </div>
+                            <div>
+                                <small class="text-muted">Yesterday, 3:20 PM</small>
+                                <span class="badge bg-success ms-2">Replied</span>
+                            </div>
+                        </div>
+                        <p class="mb-1 mt-2">Thanks for the advice! My drainage system worked perfectly.</p>
+                    </a>
+
+                    <!-- Response 3 -->
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <img src="https://randomuser.me/api/portraits/men/67.jpg" class="rounded-circle me-3"
+                                    width="40" height="40" alt="Farmer">
+                                <div>
+                                    <h6 class="mb-0">Peter Mwangi</h6>
+                                    <small class="text-muted">Regarding: Fertilizer Application Guide</small>
+                                </div>
+                            </div>
+                            <div>
+                                <small class="text-muted">Apr 23, 2023</small>
+                            </div>
+                        </div>
+                        <p class="mb-1 mt-2">Can you clarify the application rates for clay soil?</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Advisory Modal -->
+    <div class="modal fade" id="newAdvisoryModal" tabindex="-1" aria-labelledby="newAdvisoryModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newAdvisoryModalLabel">Create New Advisory</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Advisory Type</label>
+                            <div class="row g-2">
+                                <div class="col-md-3">
+                                    <input type="radio" class="btn-check" name="advisoryType" id="diseaseAlert"
+                                        autocomplete="off" checked>
+                                    <label class="btn btn-outline-danger w-100" for="diseaseAlert">
+                                        <i class="fas fa-virus me-1"></i> Disease Alert
+                                    </label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="radio" class="btn-check" name="advisoryType" id="pestAlert"
+                                        autocomplete="off">
+                                    <label class="btn btn-outline-warning w-100" for="pestAlert">
+                                        <i class="fas fa-bug me-1"></i> Pest Alert
+                                    </label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="radio" class="btn-check" name="advisoryType" id="weatherAlert"
+                                        autocomplete="off">
+                                    <label class="btn btn-outline-primary w-100" for="weatherAlert">
+                                        <i class="fas fa-cloud-rain me-1"></i> Weather Alert
+                                    </label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="radio" class="btn-check" name="advisoryType" id="bestPractice"
+                                        autocomplete="off">
+                                    <label class="btn btn-outline-success w-100" for="bestPractice">
+                                        <i class="fas fa-lightbulb me-1"></i> Best Practice
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="advisoryTitle" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="advisoryTitle"
+                                placeholder="Enter advisory title">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="advisoryContent" class="form-label">Content</label>
+                            <textarea class="form-control" id="advisoryContent" rows="6"
+                                placeholder="Write your advisory content here..."></textarea>
+                            <div class="form-text">You can use markdown formatting for better readability</div>
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Target Crops</label>
+                                <select class="form-select" multiple>
+                                    <option selected>Tomatoes</option>
+                                    <option>Maize</option>
+                                    <option>Wheat</option>
+                                    <option>Coffee</option>
+                                    <option>Potatoes</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Target Farmers</label>
+                                <select class="form-select" multiple>
+                                    <option selected>All Farmers</option>
+                                    <option>John Kamau</option>
+                                    <option>Mary Wanjiku</option>
+                                    <option>Peter Mwangi</option>
+                                    <option>James Omondi</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Priority</label>
+                            <div class="row g-2">
+                                <div class="col-md-4">
+                                    <input type="radio" class="btn-check" name="priority" id="highPriority"
+                                        autocomplete="off" checked>
+                                    <label class="btn btn-outline-danger w-100" for="highPriority">
+                                        <i class="fas fa-exclamation-circle me-1"></i> High
+                                    </label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="radio" class="btn-check" name="priority" id="mediumPriority"
+                                        autocomplete="off">
+                                    <label class="btn btn-outline-warning w-100" for="mediumPriority">
+                                        <i class="fas fa-exclamation-triangle me-1"></i> Medium
+                                    </label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="radio" class="btn-check" name="priority" id="lowPriority"
+                                        autocomplete="off">
+                                    <label class="btn btn-outline-info w-100" for="lowPriority">
+                                        <i class="fas fa-info-circle me-1"></i> Low
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Attachments (Optional)</label>
+                            <input type="file" class="form-control" multiple>
+                            <div class="form-text">Upload images, PDFs, or documents to include with advisory</div>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="saveAsTemplate">
+                            <label class="form-check-label" for="saveAsTemplate">
+                                Save as template for future use
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-outline-primary">
+                        <i class="fas fa-save me-1"></i> Save Draft
+                    </button>
+                    <button type="button" class="btn btn-success">
+                        <i class="fas fa-paper-plane me-1"></i> Send Advisory
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add this script for the advisory center functionality -->
+    <script>
+        // Initialize tooltips
+        document.addEventListener('DOMContentLoaded', function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+
     <!-- Field Report Detail Modal -->
     <div class="modal fade" id="reportDetailModal" tabindex="-1" aria-labelledby="reportDetailModalLabel"
         aria-hidden="true">
@@ -560,12 +2563,12 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-6 mb-3">
-                                            <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dG9tYXRvJTIwYmxpZ2h0fGVufDB8fDB8fHww"
+                                            <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dG9tYXRvJTIwYmxpZ2h0fGVufDB8fDB8fHww"
                                                 class="img-fluid rounded" alt="Tomato blight symptoms"
                                                 data-bs-toggle="modal" data-bs-target="#imageModal">
                                         </div>
                                         <div class="col-6 mb-3">
-                                            <img src="https://images.unsplash.com/photo-1589927986089-35812388d1f4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dG9tYXRvJTIwYmxpZ2h0fGVufDB8fDB8fHww"
+                                            <img src="https://images.unsplash.com/photo-1589927986089-35812388d1f4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dG9tYXRvJTIwYmxpZ2h0fGVufDB8fDB8fHww"
                                                 class="img-fluid rounded" alt="Tomato blight close-up"
                                                 data-bs-toggle="modal" data-bs-target="#imageModal">
                                         </div>
@@ -895,6 +2898,804 @@
         });
     </script>
 
+
+    <!-- Add this to your sidebar navigation -->
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fas fa-book me-2"></i> Knowledge Base
+        </a>
+    </li>
+
+    <!-- Main Content - Knowledge Base Section -->
+    <div class="col-12 col-lg-10 py-3" role="main">
+        <div class="row mb-4 mt-4">
+            <div class="col-md-6">
+                <h4><i class="fas fa-book me-2"></i> Agricultural Knowledge Base</h4>
+                <p class="text-muted">Access comprehensive resources on crops, diseases, and best practices</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <button class="btn btn-success me-2">
+                    <i class="fas fa-plus me-1"></i> Add Article
+                </button>
+                <button class="btn btn-outline-success">
+                    <i class="fas fa-download me-1"></i> Export Resources
+                </button>
+            </div>
+        </div>
+
+        <!-- Search and Filter Section -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search knowledge base...">
+                            <button class="btn btn-success" type="button">
+                                <i class="fas fa-search me-1"></i> Search
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-select">
+                            <option selected>Filter by Category</option>
+                            <option>Crop Guides</option>
+                            <option>Disease Library</option>
+                            <option>Pest Management</option>
+                            <option>Soil Health</option>
+                            <option>Best Practices</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <div class="d-flex flex-wrap gap-2">
+                            <button class="btn btn-sm btn-outline-success active">All</button>
+                            <button class="btn btn-sm btn-outline-success">Tomatoes</button>
+                            <button class="btn btn-sm btn-outline-success">Maize</button>
+                            <button class="btn btn-sm btn-outline-success">Wheat</button>
+                            <button class="btn btn-sm btn-outline-success">Coffee</button>
+                            <button class="btn btn-sm btn-outline-success">Potatoes</button>
+                            <button class="btn btn-sm btn-outline-success">Vegetables</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Knowledge Base Summary Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card border-start border-primary border-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6 class="text-muted">Total Articles</h6>
+                                <h3>247</h3>
+                            </div>
+                            <div class="bg-primary bg-opacity-10 p-3 rounded">
+                                <i class="fas fa-file-alt text-primary"></i>
+                            </div>
+                        </div>
+                        <small class="text-success"><i class="fas fa-arrow-up me-1"></i> 12 new this month</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-start border-success border-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6 class="text-muted">Crop Guides</h6>
+                                <h3>42</h3>
+                            </div>
+                            <div class="bg-success bg-opacity-10 p-3 rounded">
+                                <i class="fas fa-seedling text-success"></i>
+                            </div>
+                        </div>
+                        <small class="text-success">Covering 15+ crops</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-start border-warning border-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6 class="text-muted">Diseases</h6>
+                                <h3>78</h3>
+                            </div>
+                            <div class="bg-warning bg-opacity-10 p-3 rounded">
+                                <i class="fas fa-virus text-warning"></i>
+                            </div>
+                        </div>
+                        <small class="text-danger">5 new threats added</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-start border-info border-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6 class="text-muted">Pests</h6>
+                                <h3>65</h3>
+                            </div>
+                            <div class="bg-info bg-opacity-10 p-3 rounded">
+                                <i class="fas fa-bug text-info"></i>
+                            </div>
+                        </div>
+                        <small class="text-primary">With control measures</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Resources -->
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div>
+                    <span>Featured Resources</span>
+                    <span class="badge bg-primary ms-2">8</span>
+                </div>
+                <button class="btn btn-sm btn-outline-secondary">
+                    <i class="fas fa-sync-alt me-1"></i> Refresh
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <!-- Featured 1 -->
+                    <div class="col-md-3 mb-3">
+                        <div class="card h-100">
+                            <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dG9tYXRvJTIwYmxpZ2h0fGVufDB8fDB8fHww"
+                                class="card-img-top" alt="Tomato blight" style="height: 120px; object-fit: cover;">
+                            <div class="card-body">
+                                <span class="badge bg-danger mb-2">Disease Alert</span>
+                                <h6 class="card-title">Managing Tomato Late Blight</h6>
+                                <p class="card-text small text-muted">Comprehensive guide to identification, prevention,
+                                    and treatment of late blight in tomatoes.</p>
+                            </div>
+                            <div class="card-footer bg-transparent">
+                                <button class="btn btn-sm btn-outline-success w-100">
+                                    <i class="fas fa-book-open me-1"></i> Read Guide
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Featured 2 -->
+                    <div class="col-md-3 mb-3">
+                        <div class="card h-100">
+                            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2hlYXR8ZW58MHx8MHx8fDA%3D"
+                                class="card-img-top" alt="Wheat field" style="height: 120px; object-fit: cover;">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Crop Guide</span>
+                                <h6 class="card-title">Wheat Cultivation Best Practices</h6>
+                                <p class="card-text small text-muted">Optimal planting, fertilization, and harvesting
+                                    techniques for wheat farmers.</p>
+                            </div>
+                            <div class="card-footer bg-transparent">
+                                <button class="btn btn-sm btn-outline-success w-100">
+                                    <i class="fas fa-book-open me-1"></i> Read Guide
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Featured 3 -->
+                    <div class="col-md-3 mb-3">
+                        <div class="card h-100">
+                            <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ce?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFsbCUyMGFybXl3b3JtfGVufDB8fDB8fHww"
+                                class="card-img-top" alt="Fall armyworm" style="height: 120px; object-fit: cover;">
+                            <div class="card-body">
+                                <span class="badge bg-warning mb-2">Pest Alert</span>
+                                <h6 class="card-title">Fall Armyworm Control</h6>
+                                <p class="card-text small text-muted">Effective strategies for detecting and controlling
+                                    fall armyworm infestations in maize.</p>
+                            </div>
+                            <div class="card-footer bg-transparent">
+                                <button class="btn btn-sm btn-outline-success w-100">
+                                    <i class="fas fa-book-open me-1"></i> Read Guide
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Featured 4 -->
+                    <div class="col-md-3 mb-3">
+                        <div class="card h-100">
+                            <img src="https://images.unsplash.com/photo-1594122230681-6b7b6f9a344f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c29pbCUyMHRlc3R8ZW58MHx8MHx8fDA%3D"
+                                class="card-img-top" alt="Soil testing" style="height: 120px; object-fit: cover;">
+                            <div class="card-body">
+                                <span class="badge bg-info mb-2">Soil Health</span>
+                                <h6 class="card-title">Soil Testing & Amendment</h6>
+                                <p class="card-text small text-muted">How to properly test soil and implement corrective
+                                    measures for optimal crop growth.</p>
+                            </div>
+                            <div class="card-footer bg-transparent">
+                                <button class="btn btn-sm btn-outline-success w-100">
+                                    <i class="fas fa-book-open me-1"></i> Read Guide
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Knowledge Base Categories -->
+        <div class="row">
+            <!-- Crop Guides Column -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="fas fa-seedling me-2"></i> Crop Guides</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            <a href="#"
+                                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <span>
+                                    <i class="fas fa-apple-alt text-danger me-2"></i>
+                                    Tomato Cultivation Guide
+                                </span>
+                                <span class="badge bg-success rounded-pill">Updated</span>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <i class="fas fa-wheat-awn text-warning me-2"></i>
+                                Maize Production Handbook
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <i class="fas fa-bread-slice text-brown me-2"></i>
+                                Wheat Farming Techniques
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <i class="fas fa-mug-hot text-secondary me-2"></i>
+                                Coffee Growing Best Practices
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <i class="fas fa-apple-whole text-danger me-2"></i>
+                                Potato Farming Guide
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent text-center">
+                        <button class="btn btn-sm btn-outline-success">
+                            View All Crop Guides <i class="fas fa-arrow-right ms-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disease Library Column -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-header bg-danger text-white">
+                        <h5 class="mb-0"><i class="fas fa-virus me-2"></i> Disease Library</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            <a href="#"
+                                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <span>
+                                    <i class="fas fa-leaf text-success me-2"></i>
+                                    Tomato Late Blight
+                                </span>
+                                <span class="badge bg-danger rounded-pill">High Risk</span>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <i class="fas fa-leaf text-success me-2"></i>
+                                Maize Rust
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <i class="fas fa-leaf text-success me-2"></i>
+                                Coffee Berry Disease
+                            </a>
+                            <a href="#"
+                                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <span>
+                                    <i class="fas fa-leaf text-success me-2"></i>
+                                    Wheat Powdery Mildew
+                                </span>
+                                <span class="badge bg-warning rounded-pill">Alert</span>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <i class="fas fa-leaf text-success me-2"></i>
+                                Potato Early Blight
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent text-center">
+                        <button class="btn btn-sm btn-outline-danger">
+                            View All Diseases <i class="fas fa-arrow-right ms-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pest Management Column -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-header bg-warning text-dark">
+                        <h5 class="mb-0"><i class="fas fa-bug me-2"></i> Pest Management</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            <a href="#"
+                                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <span>
+                                    <i class="fas fa-bug text-danger me-2"></i>
+                                    Fall Armyworm
+                                </span>
+                                <span class="badge bg-danger rounded-pill">Urgent</span>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <i class="fas fa-bug text-danger me-2"></i>
+                                Aphids Control
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <i class="fas fa-bug text-danger me-2"></i>
+                                Whiteflies Management
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <i class="fas fa-bug text-danger me-2"></i>
+                                Stem Borers
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <i class="fas fa-bug text-danger me-2"></i>
+                                Thrips Control
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent text-center">
+                        <button class="btn btn-sm btn-outline-warning">
+                            View All Pest Guides <i class="fas fa-arrow-right ms-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Resources Section -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-graduation-cap me-2"></i> Training Resources</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <!-- Training 1 -->
+                    <div class="col-md-3 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <div class="bg-primary bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
+                                    <i class="fas fa-video fa-2x text-primary"></i>
+                                </div>
+                                <h6>Integrated Pest Management</h6>
+                                <p class="small text-muted">Video series on sustainable pest control methods</p>
+                                <button class="btn btn-sm btn-outline-primary mt-2">
+                                    <i class="fas fa-play me-1"></i> Watch Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Training 2 -->
+                    <div class="col-md-3 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <div class="bg-success bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
+                                    <i class="fas fa-file-pdf fa-2x text-success"></i>
+                                </div>
+                                <h6>Soil Fertility Handbook</h6>
+                                <p class="small text-muted">Comprehensive guide to soil health management</p>
+                                <button class="btn btn-sm btn-outline-success mt-2">
+                                    <i class="fas fa-download me-1"></i> Download
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Training 3 -->
+                    <div class="col-md-3 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <div class="bg-info bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
+                                    <i class="fas fa-chalkboard-teacher fa-2x text-info"></i>
+                                </div>
+                                <h6>Farmer Training Modules</h6>
+                                <p class="small text-muted">Complete set of training materials for extension</p>
+                                <button class="btn btn-sm btn-outline-info mt-2">
+                                    <i class="fas fa-book-open me-1"></i> Access
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Training 4 -->
+                    <div class="col-md-3 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <div class="bg-warning bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
+                                    <i class="fas fa-mobile-alt fa-2x text-warning"></i>
+                                </div>
+                                <h6>Mobile App Guides</h6>
+                                <p class="small text-muted">Tutorials for using Agricure mobile applications</p>
+                                <button class="btn btn-sm btn-outline-warning mt-2">
+                                    <i class="fas fa-external-link-alt me-1"></i> Learn More
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Article Detail Modal -->
+        <div class="modal fade" id="articleModal" tabindex="-1" aria-labelledby="articleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="articleModalLabel">Tomato Late Blight Management</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mb-4">
+                            <div class="col-md-8">
+                                <span class="badge bg-danger mb-2">Disease Alert</span>
+                                <span class="badge bg-success mb-2">Tomatoes</span>
+                                <span class="badge bg-warning mb-2">High Priority</span>
+
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg"
+                                        class="rounded-circle me-2" width="40" height="40" alt="Author">
+                                    <div>
+                                        <h6 class="mb-0">Dr. James Mwangi</h6>
+                                        <small class="text-muted">Plant Pathologist • Last updated: April 15,
+                                            2023</small>
+                                    </div>
+                                </div>
+
+                                <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dG9tYXRvJTIwYmxpZ2h0fGVufDB8fDB8fHww"
+                                    class="img-fluid rounded mb-3" alt="Tomato blight">
+
+                                <h4 class="mt-4">Overview</h4>
+                                <p>Tomato late blight, caused by the pathogen Phytophthora infestans, is one of the most
+                                    devastating diseases of tomatoes worldwide. It can cause complete crop loss under
+                                    favorable conditions.</p>
+
+                                <h4 class="mt-4">Symptoms</h4>
+                                <ul>
+                                    <li>Irregular, water-soaked lesions on leaves that rapidly expand</li>
+                                    <li>White fungal growth on underside of leaves during humid conditions</li>
+                                    <li>Dark, firm lesions on stems and petioles</li>
+                                    <li>Brown, sunken lesions on fruit that may become covered with white fungal growth
+                                    </li>
+                                </ul>
+
+                                <div class="row mt-4">
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-header bg-danger text-white">
+                                                <h6 class="mb-0">Conditions Favoring Disease</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <ul>
+                                                    <li>Cool temperatures (15-21°C)</li>
+                                                    <li>High humidity (>90%)</li>
+                                                    <li>Extended leaf wetness periods</li>
+                                                    <li>Poor air circulation</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-header bg-success text-white">
+                                                <h6 class="mb-0">Prevention</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <ul>
+                                                    <li>Plant resistant varieties when available</li>
+                                                    <li>Ensure proper spacing for air circulation</li>
+                                                    <li>Avoid overhead irrigation</li>
+                                                    <li>Apply preventive fungicides in high-risk periods</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h4 class="mt-4">Management Strategies</h4>
+                                <h5 class="mt-3">Cultural Control</h5>
+                                <p>Implement crop rotation with non-solanaceous crops for 3-4 years. Remove and destroy
+                                    infected plant material. Use drip irrigation instead of overhead watering.</p>
+
+                                <h5 class="mt-3">Chemical Control</h5>
+                                <p>When disease is detected or conditions are favorable, apply fungicides. Recommended
+                                    products include:</p>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Active Ingredient</th>
+                                            <th>Application Interval</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Bordeaux Mixture</td>
+                                            <td>Copper sulfate + lime</td>
+                                            <td>7-10 days</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Revus</td>
+                                            <td>Mandipropamid</td>
+                                            <td>10-14 days</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ridomil Gold</td>
+                                            <td>Metalaxyl-M + copper</td>
+                                            <td>14 days</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <h5 class="mt-3">Biological Control</h5>
+                                <p>Some biological options show promise in early trials:</p>
+                                <ul>
+                                    <li>Bacillus subtilis strains</li>
+                                    <li>Trichoderma harzianum</li>
+                                    <li>Pseudomonas fluorescens</li>
+                                </ul>
+
+                                <h4 class="mt-4">Monitoring and Early Detection</h4>
+                                <p>Regular field inspections are critical. Use the Agricure mobile app to report
+                                    suspected cases and receive localized alerts when disease risk is high in your area.
+                                </p>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                        <h6 class="mb-0">Related Resources</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="list-group list-group-flush">
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <i class="fas fa-file-pdf text-danger me-2"></i>
+                                                Late Blight Identification Guide
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <i class="fas fa-video text-primary me-2"></i>
+                                                Fungicide Application Video
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <i class="fas fa-file-alt text-success me-2"></i>
+                                                Resistant Tomato Varieties
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                        <h6 class="mb-0">Quick Actions</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <button class="btn btn-outline-danger w-100 mb-2">
+                                            <i class="fas fa-bell me-1"></i> Send Alert to Farmers
+                                        </button>
+                                        <button class="btn btn-outline-primary w-100 mb-2">
+                                            <i class="fas fa-print me-1"></i> Print Advisory
+                                        </button>
+                                        <button class="btn btn-outline-success w-100">
+                                            <i class="fas fa-share-alt me-1"></i> Share with Team
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6 class="mb-0">Disease Statistics</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <h6>Current Risk Level</h6>
+                                            <div class="progress" style="height: 20px;">
+                                                <div class="progress-bar bg-danger" style="width: 85%">High</div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <h6>Reported Cases This Month</h6>
+                                            <div class="h4 text-danger">24</div>
+                                        </div>
+                                        <div>
+                                            <h6>Affected Regions</h6>
+                                            <span class="badge bg-danger me-1">Nairobi</span>
+                                            <span class="badge bg-danger me-1">Kiambu</span>
+                                            <span class="badge bg-warning me-1">Nakuru</span>
+                                            <span class="badge bg-warning me-1">Meru</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">
+                            <i class="fas fa-edit me-1"></i> Edit Article
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Article Modal -->
+        <div class="modal fade" id="addArticleModal" tabindex="-1" aria-labelledby="addArticleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addArticleModalLabel">Add New Knowledge Base Article</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row mb-3">
+                                <div class="col-md-8">
+                                    <label for="articleTitle" class="form-label">Article Title</label>
+                                    <input type="text" class="form-control" id="articleTitle"
+                                        placeholder="Enter article title">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="articleType" class="form-label">Article Type</label>
+                                    <select class="form-select" id="articleType">
+                                        <option selected disabled>Select type</option>
+                                        <option>Crop Guide</option>
+                                        <option>Disease Information</option>
+                                        <option>Pest Management</option>
+                                        <option>Soil Health</option>
+                                        <option>Best Practice</option>
+                                        <option>Research Summary</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Categories</label>
+                                <div class="row g-2">
+                                    <div class="col-auto">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="tomatoesCat" checked>
+                                            <label class="form-check-label" for="tomatoesCat">Tomatoes</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="maizeCat">
+                                            <label class="form-check-label" for="maizeCat">Maize</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="wheatCat">
+                                            <label class="form-check-label" for="wheatCat">Wheat</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="coffeeCat">
+                                            <label class="form-check-label" for="coffeeCat">Coffee</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="potatoesCat">
+                                            <label class="form-check-label" for="potatoesCat">Potatoes</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="vegetablesCat">
+                                            <label class="form-check-label" for="vegetablesCat">Vegetables</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="articleSummary" class="form-label">Summary</label>
+                                <textarea class="form-control" id="articleSummary" rows="3"
+                                    placeholder="Brief summary of the article content"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="articleContent" class="form-label">Content</label>
+                                <div id="articleContentEditor" style="height: 300px;"></div>
+                                <div class="form-text">Use the toolbar to format your content. You can add images,
+                                    tables, and more.</div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="articleImages" class="form-label">Images</label>
+                                    <input type="file" class="form-control" id="articleImages" multiple
+                                        accept="image/*">
+                                    <div class="form-text">Upload images to include in the article (max 5 images)</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="articleAttachments" class="form-label">Attachments</label>
+                                    <input type="file" class="form-control" id="articleAttachments" multiple>
+                                    <div class="form-text">Upload PDFs, documents, or other resources</div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Priority Level</label>
+                                <div class="row g-2">
+                                    <div class="col-md-4">
+                                        <input type="radio" class="btn-check" name="priorityLevel" id="priorityHigh"
+                                            autocomplete="off">
+                                        <label class="btn btn-outline-danger w-100" for="priorityHigh">
+                                            <i class="fas fa-exclamation-circle me-1"></i> High
+                                        </label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="radio" class="btn-check" name="priorityLevel" id="priorityMedium"
+                                            autocomplete="off" checked>
+                                        <label class="btn btn-outline-warning w-100" for="priorityMedium">
+                                            <i class="fas fa-exclamation-triangle me-1"></i> Medium
+                                        </label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="radio" class="btn-check" name="priorityLevel" id="priorityLow"
+                                            autocomplete="off">
+                                        <label class="btn btn-outline-success w-100" for="priorityLow">
+                                            <i class="fas fa-info-circle me-1"></i> Low
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="featureArticle">
+                                <label class="form-check-label" for="featureArticle">
+                                    Feature this article on the knowledge base homepage
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-outline-primary">
+                            <i class="fas fa-save me-1"></i> Save Draft
+                        </button>
+                        <button type="button" class="btn btn-success">
+                            <i class="fas fa-check me-1"></i> Publish Article
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add this script for the knowledge base functionality -->
+    <script>
+        // Initialize rich text editor
+        document.addEventListener('DOMContentLoaded', function () {
+            // This would be replaced with actual rich text editor initialization
+            // For example, using Quill.js or TinyMCE in a real implementation
+            console.log("Rich text editor would be initialized here");
+
+            // Handle article card clicks
+            document.querySelectorAll('.card .btn-outline-success').forEach(button => {
+                button.addEventListener('click', function () {
+                    $('#articleModal').modal('show');
+                });
+            });
+        });
+    </script>
+
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Leaflet JS -->
@@ -902,20 +3703,36 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
         // Initialize Map
-        var map = L.map('map').setView([37.7749, -122.4194], 12);
+        var map = L.map('map').setView([-1.286389, 36.817223], 12);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Add farmer locations
-        L.marker([37.7749, -122.4194]).addTo(map)
+        // Add farmer locations (approximate coordinates for Kenyan locations)
+        L.marker([-1.286389, 36.817223]).addTo(map)
             .bindPopup("<b>John's Farm</b><br>Tomatoes - Leaf spots");
 
-        L.marker([37.8044, -122.4113]).addTo(map)
+        L.marker([-1.247195, 36.679944]).addTo(map)
             .bindPopup("<b>Green Valley Co-op</b><br>Corn - Rust suspected");
 
-        L.marker([37.7219, -122.4758]).addTo(map)
+        L.marker([-1.042108, 37.083375]).addTo(map)
             .bindPopup("<b>Maria Garcia</b><br>Wheat - Yellowing");
+
+        // Initialize Farmer Map
+        var farmerMap = L.map('farmerMap').setView([-1.286389, 36.817223], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(farmerMap);
+
+        // Add farmer locations to farmerMap (same as above)
+        L.marker([-1.286389, 36.817223]).addTo(farmerMap)
+            .bindPopup("<b>John Kamau</b><br>Nairobi West");
+
+        L.marker([-1.247195, 36.679944]).addTo(farmerMap)
+            .bindPopup("<b>Mary Wanjiku</b><br>Kiambu");
+
+        L.marker([-1.042108, 37.083375]).addTo(farmerMap)
+            .bindPopup("<b>Peter Mwangi</b><br>Thika");
 
         // Initialize Chart
         const ctx = document.getElementById('diseaseChart').getContext('2d');
@@ -949,7 +3766,185 @@
                 }
             }
         });
+
+        //Beginning of Status Chart for Field Reports
+        const statusCtx = document.getElementById('statusChart').getContext('2d');
+        const statusChart = new Chart(statusCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Pending', 'In Progress', 'Resolved', 'Urgent'],
+                datasets: [{
+                    data: [14, 10, 98, 5],
+                    backgroundColor: [
+                        '#ffc107',
+                        '#0dcaf0',
+                        '#198754',
+                        '#dc3545'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                    }
+                }
+            }
+        });
+
+        // Issues Chart
+        const issuesCtx = document.getElementById('issuesChart').getContext('2d');
+        const issuesChart = new Chart(issuesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Late Blight', 'Fall Armyworm', 'Rust', 'Aphids', 'Powdery Mildew', 'Other'],
+                datasets: [{
+                    label: 'Report Count',
+                    data: [32, 28, 19, 15, 12, 21],
+                    backgroundColor: '#2e7d32',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Disease Trends Chart
+        const trendsCtx = document.getElementById('diseaseTrendsChart').getContext('2d');
+        const trendsChart = new Chart(trendsCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [
+                    {
+                        label: 'Tomato Late Blight',
+                        data: [5, 8, 12, 15, 18, 22, 25],
+                        borderColor: '#dc3545',
+                        backgroundColor: 'rgba(220, 53, 69, 0.1)',
+                        fill: true
+                    },
+                    {
+                        label: 'Maize Rust',
+                        data: [3, 5, 8, 10, 7, 5, 4],
+                        borderColor: '#fd7e14',
+                        backgroundColor: 'rgba(253, 126, 20, 0.1)',
+                        fill: true
+                    },
+                    {
+                        label: 'Coffee Berry Disease',
+                        data: [2, 3, 4, 6, 8, 10, 12],
+                        borderColor: '#6f42c1',
+                        backgroundColor: 'rgba(111, 66, 193, 0.1)',
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Reported Cases'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Symptom Checker Wizard
+        document.addEventListener('DOMContentLoaded', function () {
+            let currentStep = 1;
+            const totalSteps = 3;
+
+            document.getElementById('nextBtn').addEventListener('click', function () {
+                if (currentStep < totalSteps) {
+                    document.getElementById(`step${currentStep}`).style.display = 'none';
+                    currentStep++;
+                    document.getElementById(`step${currentStep}`).style.display = 'block';
+
+                    if (currentStep > 1) {
+                        document.getElementById('prevBtn').style.display = 'block';
+                    }
+
+                    if (currentStep === totalSteps) {
+                        this.innerHTML = '<i class="fas fa-search me-1"></i> Diagnose';
+                    }
+                } else {
+                    // Submit diagnosis
+                    $('#symptomCheckerModal').modal('hide');
+                    // Process diagnosis here
+                }
+            });
+
+            document.getElementById('prevBtn').addEventListener('click', function () {
+                if (currentStep > 1) {
+                    document.getElementById(`step${currentStep}`).style.display = 'none';
+                    currentStep--;
+                    document.getElementById(`step${currentStep}`).style.display = 'block';
+
+                    if (currentStep === 1) {
+                        this.style.display = 'none';
+                    }
+
+                    document.getElementById('nextBtn').innerHTML = 'Next <i class="fas fa-arrow-right ms-1"></i>';
+                }
+            });
+        });
     </script>
+
+    // Add this script at the end of your file, before the closing
+</body> tag
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const themeSwitch = document.getElementById('themeSwitch');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+        // Check for saved theme preference or use the system preference
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+            document.body.classList.add('dark-mode');
+            themeSwitch.checked = true;
+        }
+
+        // Theme switcher
+        themeSwitch.addEventListener('change', function () {
+            if (this.checked) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Listen for system theme changes
+        prefersDarkScheme.addListener(e => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.body.classList.add('dark-mode');
+                    themeSwitch.checked = true;
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    themeSwitch.checked = false;
+                }
+            }
+        });
+    });
+</script>
 </body>
 
 </html>
