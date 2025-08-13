@@ -1,0 +1,230 @@
+{% extends "agronomist.html" %}
+
+{% block title %}Agronomist Dashboard{% endblock %}
+
+{% block content %}
+
+<!-- Dashboard section -->
+<div id="dashboard" class="dashboard-section">
+    <div class="row mb-4 mt-4">
+        <div class="col-md-7">
+            <h4>Dashboard Overview</h4>
+            <p class="text-muted">Welcome back! Here's what's happening in your region today.</p>
+        </div>
+        <div class="col-md-5 text-md-end">
+            <button class="btn btn-success me-2 btn-green" data-bs-toggle="modal" data-bs-target="#newReportModal">
+                <i class="fas fa-plus me-1"></i> New Field Report
+            </button>
+            <button class="btn btn-outline-success btn-green">
+                <i class="fas fa-calendar me-1"></i> Schedule Visit
+            </button>
+        </div>
+    </div>
+
+    <!-- Current Alerts Row -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card priority-high">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>High Priority Cases</span>
+                    <span class="badge bg-danger">3 New</span>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6>Tomato Blight</h6>
+                                <small class="text-muted">John's Farm</small>
+                            </div>
+                            <button class="btn btn-sm btn-outline-danger">Review</button>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6>Corn Rust</h6>
+                                <small class="text-muted">Green Valley Co-op</small>
+                            </div>
+                            <button class="btn btn-sm btn-outline-danger">Review</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card priority-medium">
+                <div class="card-header">
+                    Weather Advisory
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-cloud-rain fa-2x text-primary me-3"></i>
+                        <div>
+                            <h5 class="mb-0">Heavy Rain Expected</h5>
+                            <small class="text-muted">Tomorrow - 80% chance</small>
+                        </div>
+                    </div>
+                    <p class="card-text">Increased risk of fungal diseases. Recommend preventive
+                        fungicide
+                        application for susceptible crops.</p>
+                    <button class="btn btn-sm btn-outline-warning">Send Advisory</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Quick Actions</span>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-success text-start">
+                            <i class="fas fa-diagnoses me-2"></i> Review Pending Diagnoses
+                        </button>
+                        <button class="btn btn-outline-success text-start">
+                            <i class="fas fa-comments me-2"></i> Farmer Messages
+                        </button>
+                        <button class="btn btn-outline-success text-start">
+                            <i class="fas fa-calendar-check me-2"></i> Upcoming Visits
+                        </button>
+                        <button class="btn btn-outline-success text-start">
+                            <i class="fas fa-file-alt me-2"></i> Create Advisory Template
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Assigned Farmers and Map Row -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Recent Field Reports</span>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown">
+                            Filter by Crop
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">All Crops</a></li>
+                            <li><a class="dropdown-item" href="#">Tomatoes</a></li>
+                            <li><a class="dropdown-item" href="#">Corn</a></li>
+                            <li><a class="dropdown-item" href="#">Wheat</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Farmer</th>
+                                    <th scope="col">Crop</th>
+                                    <th scope="col">Issue</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>John Doe</td>
+                                    <td>Tomatoes</td>
+                                    <td>Leaf spots</td>
+                                    <td>Today</td>
+                                    <td><span class="badge bg-warning">Pending</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Review</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Green Valley Co-op</td>
+                                    <td>Corn</td>
+                                    <td>Rust suspected</td>
+                                    <td>Yesterday</td>
+                                    <td><span class="badge bg-info">Diagnosed</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Follow-up</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Maria Garcia</td>
+                                    <td>Wheat</td>
+                                    <td>Yellowing</td>
+                                    <td>2 days ago</td>
+                                    <td><span class="badge bg-success">Resolved</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-secondary">View</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Farmer Locations
+                </div>
+                <div class="card-body p-0">
+                    <div id="map" class="map-container" aria-label="Interactive map of farmer locations">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Analytics Preview -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    Disease Trends in Your Region
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <canvas id="diseaseChart" height="150"></canvas>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Top 3 Current Issues</h5>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">Tomato Late Blight</h6>
+                                        <small>12 cases</small>
+                                    </div>
+                                    <small class="text-muted">Wet conditions increasing spread</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">Corn Rust</h6>
+                                        <small>8 cases</small>
+                                    </div>
+                                    <small class="text-muted">New strain detected</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">Wheat Powdery Mildew</h6>
+                                        <small>5 cases</small>
+                                    </div>
+                                    <small class="text-muted">Early season outbreak</small>
+                                </a>
+                            </div>
+                            <button class="btn btn-sm btn-outline-success mt-3 w-100">
+                                View Full Analytics <i class="fas fa-arrow-right ms-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

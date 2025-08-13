@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agricure - Diagnosis History</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #28a745;
+            --secondary-color: #6c757d;
+            --light-color: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .sidebar {
+            background-color: white;
+            min-height: 100vh;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar .nav-link {
+            color: var(--secondary-color);
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+        
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .sidebar .nav-link i {
+            margin-right: 10px;
+        }
+        
+        .dashboard-card {
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .history-item {
+            border-left: 4px solid var(--primary-color);
+            transition: transform 0.2s;
+        }
+        
+        .history-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .severity-low {
+            color: #28a745;
+        }
+        
+        .severity-medium {
+            color: #ffc107;
+        }
+        
+        .severity-high {
+            color: #dc3545;
+        }
+        
+        .language-selector {
+            border: none;
+            background-color: transparent;
+        }
+        
+        .filter-card {
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .history-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        
+        .status-badge {
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 10px;
+        }
+        
+        .pagination .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .pagination .page-link {
+            color: var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                min-height: auto;
+            }
+            
+            .history-image {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-md-3 col-lg-2 d-md-block sidebar p-0">
+                <div class="p-3 text-center">
+                    <img src="logo.png" alt="Agricure Logo" class="img-fluid" style="max-height: 50px;">
+                    <h5 class="mt-2">Agricure</h5>
+                </div>
+                <hr class="mx-3">
+                <ul class="nav flex-column px-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-section="dashboard">
+                            <i class="bi bi-speedometer2"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-section="upload-diagnosis">
+                            <i class="bi bi-upload"></i> Upload Diagnosis
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" data-section="history">
+                            <i class="bi bi-clipboard-data"></i> History
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-section="analytics">
+                            <i class="bi bi-graph-up"></i> Analytics
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-section="disease-library">
+                            <i class="bi bi-book"></i> Disease Library
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-section="settings">
+                            <i class="bi bi-gear"></i> Settings
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 ms-sm-auto px-md-4 py-4">
+                <!-- History Section -->
+                <div id="history-section">
+                    <!-- Top Navigation -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2>Diagnosis History</h2>
+                        <div class="d-flex align-items-center">
+                            <select class="form-select language-selector me-3" aria-label="Language selector">
+                                <option selected>English</option>
+                                <option>हिन्दी</option>
+                                <option>Español</option>
+                                <option>Français</option>
+                            </select>
+                            <div class="dropdown">
+                                <button class="btn btn-light dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle me-1"></i> Farmer User
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i> Profile</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-lock me-2"></i> Change Password</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filters and Search -->
+                    <div class="card filter-card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-search"></i></span>
+                                        <input type="text" class="form-control" placeholder="Search diagnoses...">
+                                        <button class="btn btn-outline-secondary" type="button">Search</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <select class="form-select" style="width: auto;">
+                                            <option selected>All Crops</option>
+                                            <option>Tomato</option>
+                                            <option>Wheat</option>
+                                            <option>Corn</option>
+                                            <option>Rice</option>
+                                            <option>Potato</option>
+                                        </select>
+                                        <select class="form-select" style="width: auto;">
+                                            <option selected>All Status</option>
+                                            <option>Healthy</option>
+                                            <option>Diseased</option>
+                                        </select>
+                                        <select class="form-select" style="width: auto;">
+                                            <option selected>All Time</option>
+                                            <option>Last 7 days</option>
+                                            <option>Last 30 days</option>
+                                            <option>Last 6 months</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- History List -->
+                    <div class="card dashboard-card mb-4">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="card-title mb-0">Recent Diagnoses</h5>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-primary me-2">
+                                        <i class="bi bi-download"></i> Export
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-secondary">
+                                        <i class="bi bi-funnel"></i> Advanced Filters
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="list-group">
+                                <!-- History Item 1 -->
+                                <div class="list-group-item history-item py-3">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-1 d-none d-md-block">
+                                            <img src="https://via.placeholder.com/80" alt="Crop image" class="history-image">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h6 class="mb-1">Tomato - Late Blight</h6>
+                                            <small class="text-muted">Diagnosed: Today, 10:45 AM</small>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <span class="badge bg-success bg-opacity-10 text-success status-badge">
+                                                <i class="bi bi-check-circle-fill"></i> Confirmed
+                                            </span>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <span class="severity-high">
+                                                <i class="bi bi-exclamation-triangle-fill"></i> High severity
+                                            </span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <span class="badge bg-light text-dark me-1"><i class="bi bi-droplet me-1"></i> Reduce watering</span>
+                                            <span class="badge bg-light text-dark me-1"><i class="bi bi-shield-plus me-1"></i> Fungicide</span>
+                                        </div>
+                                        <div class="col-md-1 text-end">
+                                            <button class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-eye"></i> View
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- History Item 2 -->
+                                <div class="list-group-item history-item py-3">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-1 d-none d-md-block">
+                                            <img src="https://via.placeholder.com/80" alt="Crop image" class="history-image">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h6 class="mb-1">Wheat - Rust</h6>
+                                            <small class="text-muted">Diagnosed: Yesterday, 3:22 PM</small>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <span class="badge bg-success bg-opacity-10 text-success status-badge">
+                                                <i class="bi bi-check-circle-fill"></i> Confirmed
+                                            </span>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <span class="severity-medium">
+                                                <i class="bi bi-exclamation-triangle-fill"></i> Medium severity
+                                            </span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <span class="badge bg-light text-dark me-1"><i class="bi bi-shield-plus me-1"></i> Sulfur spray</span>
+                                            <span class="badge bg-light text-dark me-1"><i class="bi bi-arrow-repeat me-1"></i> Crop rotation</span>
+                                        </div>
+                                        <div class="col-md-1 text-end">
+                                            <button class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-eye"></i> View
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- History Item 3 -->
+                                <div class="list-group-item history-item py-3">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-1 d-none d-md-block">
+                                            <img src="https://via.placeholder.com/80" alt="Crop image" class="history-image">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h6 class="mb-1">Corn - Healthy</h6>
+                                            <small class="text-muted">Diagnosed: 2 days ago</small>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <span class="badge bg-success bg-opacity-10 text-success status-badge">
+                                                <i class="bi bi-check-circle-fill"></i> Confirmed
+                                            </span>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <span class="severity-low">
+                                                <i class="bi bi-check-circle-fill"></i> No disease
+                                            </span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <span class="badge bg-light text-dark me-1"><i class="bi bi-check-circle me-1"></i> Continue monitoring</span>
+                                        </div>
+                                        <div class="col-md-1 text-end">
+                                            <button class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-eye"></i> View
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- History Item 4 -->
+                                <div class="list-group-item history-item py-3">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-1 d-none d-md-block">
+                                            <img src="https://via.placeholder.com/80" alt="Crop image" class="history-image">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h6 class="mb-1">Potato - Early Blight</h6>
+                                            <small class="text-muted">Diagnosed: 1 week ago</small>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <span class="badge bg-warning bg-opacity-10 text-warning status-badge">
+                                                <i class="bi bi-exclamation-triangle-fill"></i> Needs review
+                                            </span>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <span class="severity-medium">
+                                                <i class="bi bi-exclamation-triangle-fill"></i> Medium severity
+                                            </span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <span class="badge bg-light text-dark me-1"><i class="bi bi-shield-plus me-1"></i> Copper fungicide</span>
+                                            <span class="badge bg-light text-dark me-1"><i class="bi bi-trash me-1"></i> Remove debris</span>
+                                        </div>
+                                        <div class="col-md-1 text-end">
+                                            <button class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-eye"></i> View
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- History Item 5 -->
+                                <div class="list-group-item history-item py-3">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-1 d-none d-md-block">
+                                            <img src="https://via.placeholder.com/80" alt="Crop image" class="history-image">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h6 class="mb-1">Rice - Blast</h6>
+                                            <small class="text-muted">Diagnosed: 2 weeks ago</small>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <span class="badge bg-success bg-opacity-10 text-success status-badge">
+                                                <i class="bi bi-check-circle-fill"></i> Confirmed
+                                            </span>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <span class="severity-high">
+                                                <i class="bi bi-exclamation-triangle-fill"></i> High severity
+                                            </span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <span class="badge bg-light text-dark me-1"><i class="bi bi-shield-plus me-1"></i> Systemic fungicide</span>
+                                            <span class="badge bg-light text-dark me-1"><i class="bi bi-droplet me-1"></i> Reduce nitrogen</span>
+                                        </div>
+                                        <div class="col-md-1 text-end">
+                                            <button class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-eye"></i> View
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Pagination -->
+                            <nav aria-label="Diagnosis pagination" class="mt-4">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    
+                    <!-- Statistics Card -->
+                    <div class="card dashboard-card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Diagnosis Statistics</h5>
+                            <div class="row">
+                                <div class="col-md-4 mb-4 mb-md-0">
+                                    <div class="text-center">
+                                        <h3 class="text-success">12</h3>
+                                        <p class="text-muted mb-0">Healthy Diagnoses</p>
+                                        <small class="text-success">+2 from last month</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4 mb-md-0">
+                                    <div class="text-center">
+                                        <h3 class="text-warning">5</h3>
+                                        <p class="text-muted mb-0">Medium Severity</p>
+                                        <small class="text-warning">-1 from last month</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <h3 class="text-danger">3</h3>
+                                        <p class="text-muted mb-0">High Severity</p>
+                                        <small class="text-danger">+1 from last month</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                                <button class="btn btn-outline-primary me-2">
+                                    <i class="bi bi-graph-up me-1"></i> View Full Analytics
+                                </button>
+                                <button class="btn btn-primary">
+                                    <i class="bi bi-share me-1"></i> Share Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation between sections
+            function showSection(sectionId) {
+                document.querySelectorAll('[id$="-section"]').forEach(section => {
+                    section.style.display = 'none';
+                });
+                document.getElementById(`${sectionId}-section`).style.display = 'block';
+                
+                // Update active nav link
+                document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-section') === sectionId) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            // Set click handlers for navigation
+            document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showSection(this.getAttribute('data-section'));
+                });
+            });
+            
+            // Initialize with history section visible
+            showSection('history');
+        });
+    </script>
+</body>
+</html>
